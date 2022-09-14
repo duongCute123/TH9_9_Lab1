@@ -1,10 +1,11 @@
 import { StatusBar } from 'expo-status-bar';
 import { StyleSheet, Text, View } from 'react-native';
-import Hi from './component/Hello';
+import Login from './component/login/login';
+import Form from './component/form/form';
 export default function App() {
   return (
     <View>
-      <Hi/>
+      <Form/>
     </View>
   );
 }

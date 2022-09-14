@@ -1,43 +1,70 @@
-import React from "react";
-import { Component } from "react";
-import { useState } from "react";
-import { View, Text, TextInput, Button } from "react-native";
+import React, { Component } from 'react'
+import { View, Text, TouchableOpacity, TextInput, StyleSheet } from 'react-native'
 
-//Tạo form login
-const Login = () => {
-    const list = [
-        {
-            username: 'diep',
-            pass: 123
-        },
-        {
-            username: 'thu',
-            pass: 123456
-        }
-    ]
-    const check = (e) => {
-        const [data, setData] = useState(list)
-        const { name, value } = e.target
-        setData({ ...data, [name]: value })
-        if (data) {
-            console.log("Đăng nhập thành công")
-            alert("Đăng nhập thành công")
-        }
-        else {
-            alert("Lỗi đăng nhập")
-        }
-
+class Login extends Component {
+    state = {
+        email: '',
+        password: ''
     }
-    const { username, pass } = data
-    return (
-        <View>
-            <Text>Nhập username vào</Text>
-            <TextInput placeholder="Nhập username vào" name='username' value={username}></TextInput>
-            <Text>Nhập mật khẩu vào</Text>
-            <TextInput placeholder="Nhập mật khẩu vào" name='pass' value={pass}></TextInput>
-            <Text></Text>
-            <Button title="Login" onPress={check}></Button>
-        </View>
-    )
+    handleEmail = (text) => {
+        this.setState({ email: text })
+    }
+    handlePassword = (text) => {
+        this.setState({ password: text })
+    }
+    login = (email, pass) => {
+        alert('email: ' + email + ' password: ' + pass)
+    }
+    render() {
+        return (
+            <View style={styles.container}>
+                <Text style={styles.texts}>Nhập tên tài khoản</Text>
+                <TextInput style={styles.input}
+                    underlineColorAndroid="transparent"
+                    placeholder="Nhập tên tài khoản"
+                    placeholderTextColor="#9a73ef"
+                    autoCapitalize="none"
+                    onChangeText={this.handleEmail} />
+                <Text style={styles.texts}>Nhập mật khẩu</Text>
+                <TextInput style={styles.input}
+                    underlineColorAndroid="transparent"
+                    placeholder="Nhập mật khẩu"
+                    placeholderTextColor="#9a73ef"
+                    autoCapitalize="none"
+                    onChangeText={this.handlePassword} />
+
+                <TouchableOpacity
+                    style={styles.submitButton}
+                    onPress={
+                        () => this.login(this.state.email, this.state.password)
+                    }>
+                    <Text style={styles.submitButtonText}> Submit </Text>
+                </TouchableOpacity>
+            </View>
+        )
+    }
 }
+const styles = StyleSheet.create({
+    container: {
+        paddingTop: 23
+    },
+    input: {
+        margin: 15,
+        height: 40,
+        borderColor: '#7a42f4',
+        borderWidth: 1
+    },
+    submitButton: {
+        backgroundColor: '#7a42f4',
+        padding: 10,
+        margin: 15,
+        height: 40,
+    },
+    submitButtonText: {
+        color: 'white'
+    },
+    texts:{
+        marginLeft:20
+    }
+})
 export default Login

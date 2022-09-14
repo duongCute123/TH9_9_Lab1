@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { Component } from "react";
-import { View,TextInput,Text,Button } from "react-native";
+import { View,TextInput,Text,Button,StyleSheet } from "react-native";
 const Form=()=>{
     const list={
         first_name:'',
@@ -12,18 +12,24 @@ const Form=()=>{
         setData({...data,[name]:value})
     }
     const submit=(e)=>{
-        e.prevenDefault()
+        e.preventDefault()
         console.log(data);
     }
     const {first_name,last_name}=data
     return(
-        <View>
+        <View style={styles.container}>
             <Text>Nhập tên của bạn vào</Text>
-            <TextInput placeholder="Nhập tên của bạn vào" name="first_name" value={first_name} onChange={onchage}></TextInput>
+            <TextInput placeholder="Nhập tên của bạn vào" name="first_name" onChange={onchage}></TextInput>
             <Text></Text>
             <Button title="Submit" onPress={submit}></Button>
             <Text>{first_name}</Text>
         </View>
     )
 }
+const styles=StyleSheet.create({
+    container:{
+        paddingTop:40,
+        marginLeft:20
+    }
+})
 export default Form
